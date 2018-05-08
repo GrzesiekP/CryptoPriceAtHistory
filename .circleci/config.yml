@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: microsoft/aspnetcore-build:latest
+    steps:
+      - checkout
+      - run:
+          name: restore_nuget
+          command: 'dotnet restore CryptoPriceAtHistory.sln'
+      - run:
+          name: build
+          command: 'dotnet build CryptoPriceAtHistory.sln'
+  test:
+    docker:
+      - image: microsoft/aspnetcore-build:latest
+    steps:
+      - checkout
+      - run:
+          name: test
+          command: 'dotnet test "CryptoPriceAtHistory.Tests/CryptoPriceAtHistory.Tests.csproj"'
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
