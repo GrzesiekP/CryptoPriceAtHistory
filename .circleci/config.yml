@@ -19,6 +19,14 @@ jobs:
       - run:
           name: test
           command: 'dotnet test "CryptoPriceAtHistory.Tests/CryptoPriceAtHistory.Tests.csproj"'
+  dockerize:
+    machine: true
+    steps:
+       - checkout
+       - run: docker login -u grzesiekp -p $DOCKER_PASSWORD
+       - run: docker-compose up -d --build
+       - run: docker tag wallet grzesiekp/wallet:latest
+       - run: docker push grzesiekp/wallet
 
 workflows:
   version: 2
@@ -26,3 +34,5 @@ workflows:
     jobs:
       - build
       - test
+      - dockerize:
+          context: DockerCredentials
