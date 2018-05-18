@@ -16,5 +16,17 @@ namespace CryptoPriceAtHistory.Tests
 
             Assert.AreNotEqual(0, price);
         }
+
+        [Test, MaxTime(5000)]
+        [TestCase("ETH", "BTC", ExpectedResult = true)]
+        [TestCase("XMR", "BTC", ExpectedResult = true)]
+        [TestCase("BTC", "USDT", ExpectedResult = true)]
+        [TestCase("INVALID", "INVALIDALSO", ExpectedResult = false)]
+        public bool ShouldRecognizeIfPairExist(string priceOf, string valuedIn)
+        {
+            var exist = PoloniexApi.PairExist(priceOf, valuedIn);
+
+            return exist;
+        }
     }
 }
