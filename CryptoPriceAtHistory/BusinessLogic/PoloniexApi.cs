@@ -12,8 +12,16 @@ namespace CryptoPriceAtHistory.BusinessLogic
             if (dateTime > DateTime.Now)
                 return 0;
 
-            var timestampOfDate = ((DateTimeOffset)dateTime).ToUnixTimeSeconds();
-            return GetBitcoinPrice(timestampOfDate);
+            try
+            {
+                var timestampOfDate = ((DateTimeOffset) dateTime).ToUnixTimeSeconds();
+                return GetBitcoinPrice(timestampOfDate);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                // log exception
+                return 0;
+            }
         }
 
         private static double GetBitcoinPrice(long timestamp)

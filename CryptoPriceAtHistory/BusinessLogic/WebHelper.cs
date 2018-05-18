@@ -10,10 +10,10 @@ namespace CryptoPriceAtHistory.BusinessLogic
             var webReq = (HttpWebRequest)WebRequest.Create(string.Format(fullUrl));
             webReq.Method = "GET";
 
-            var WebResp = (HttpWebResponse)webReq.GetResponse();
+            var webResp = (HttpWebResponse)webReq.GetResponse();
 
             string jsonString;
-            using (var stream = WebResp.GetResponseStream())
+            using (var stream = webResp.GetResponseStream())
             {
                 var reader = new StreamReader(stream, System.Text.Encoding.UTF8);
                 jsonString = reader.ReadToEnd();
