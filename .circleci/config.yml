@@ -1,5 +1,13 @@
 version: 2
 jobs:
+  info:
+    docker:
+      - image: microsoft/aspnetcore-build:latest
+    steps:
+      - checkout
+      - run:
+          name: dotnet-version
+          command: 'dotnet --info'
   build:
     docker:
       - image: microsoft/aspnetcore-build:latest
@@ -16,6 +24,7 @@ jobs:
       - image: microsoft/aspnetcore-build:latest
     steps:
       - checkout
+      - run: 'set -e'
       - run:
           name: test
           command: 'dotnet test "CryptoPriceAtHistory.Tests/CryptoPriceAtHistory.Tests.csproj"'
@@ -32,6 +41,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
+      - info
       - build
       - test
       - dockerize:
