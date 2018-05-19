@@ -61,7 +61,6 @@ namespace CryptoPriceAtHistory.Tests
         [TestCase("01/20/2018", ExpectedResult = null)]
         [TestCase("01/20/2030", ExpectedResult = ErrorType.INVALID_DATE)]
         [TestCase("01/20/1990", ExpectedResult = ErrorType.INVALID_DATE)]
-        [TestCase(null, ExpectedResult = ErrorType.UNKNOWN_ERROR)]
         public ErrorType? ShouldReturnInvalidDateError(DateTime dateTime)
         {
             var response = PoloniexApi.GetPrice(dateTime, _btcString, _usdtString);
