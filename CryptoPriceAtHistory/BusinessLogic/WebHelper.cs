@@ -9,6 +9,7 @@ namespace CryptoPriceAtHistory.BusinessLogic
         {
             var webReq = (HttpWebRequest)WebRequest.Create(string.Format(fullUrl));
             webReq.Method = "GET";
+            webReq.Timeout = 25000;
 
             var webResp = (HttpWebResponse)webReq.GetResponse();
 

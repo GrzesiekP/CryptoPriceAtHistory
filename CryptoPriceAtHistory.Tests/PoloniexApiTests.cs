@@ -13,7 +13,7 @@ namespace CryptoPriceAtHistory.Tests
         private readonly string _usdtString = "USDT";
 
 
-        [Test, MaxTime(5000)]
+        [Test, MaxTime(10000)]
         public void ShouldReturnPriceAtDate()
         {
             var price = PoloniexApi.GetBitcoinPrice(_date);
@@ -21,7 +21,7 @@ namespace CryptoPriceAtHistory.Tests
             Assert.AreNotEqual(0, price);
         }
 
-        [Test, MaxTime(10000)]
+        [Test, MaxTime(30000)]
         [TestCase("ETH", "BTC", ExpectedResult = true)]
         [TestCase("XMR", "BTC", ExpectedResult = true)]
         [TestCase("BTC", "USDT", ExpectedResult = true)]
@@ -39,7 +39,7 @@ namespace CryptoPriceAtHistory.Tests
             return exist;
         }
 
-        [Test, MaxTime(10000)]
+        [Test, MaxTime(30000)]
         [TestCase("ETH", "BTC", ExpectedResult = null)]
         [TestCase("XMR", "BTC", ExpectedResult = null)]
         [TestCase("ASDFG", "WERT", ExpectedResult = ErrorType.INVALID_CURRENCY_PAIR)]
@@ -57,7 +57,7 @@ namespace CryptoPriceAtHistory.Tests
             return error;
         }
 
-        [Test, MaxTime(10000)]
+        [Test, MaxTime(30000)]
         [TestCase("01/20/2018", ExpectedResult = null)]
         [TestCase("01/20/2030", ExpectedResult = ErrorType.INVALID_DATE)]
         [TestCase("01/20/1990", ExpectedResult = ErrorType.INVALID_DATE)]
