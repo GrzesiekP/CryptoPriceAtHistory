@@ -45,7 +45,7 @@ namespace CryptoPriceAtHistory
                 Error = ErrorType.INVALID_CURRENCY_PAIR;
                 ParseErrorMessage();
             }
-            else if ((int)JArray.Parse(_rawContent)[0][DATE_KEY] == 0)
+            else if (FetchedDateIsInvalid(_rawContent))
             {
                 Error = ErrorType.INVALID_DATE;
                 ErrorMessage = ErrorDictionaries.PoloniexErrors()[Error];
@@ -84,6 +84,19 @@ namespace CryptoPriceAtHistory
             {
                 Error = ErrorType.UNKNOWN_ERROR;
                 ErrorMessage = e.Message;
+            }
+        }
+
+        private bool FetchedDateIsInvalid(string rawJson)
+        {
+            try
+            {
+                var date = (int) JArray.Parse(rawJson)[0][DATE_KEY];
+                return date == 0;
+            }
+            catch (Exception e)
+            {
+                return true;
             }
         }
     }
