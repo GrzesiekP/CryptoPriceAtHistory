@@ -9,6 +9,12 @@ namespace CryptoPriceAtHistory.Controllers
     [Route("api/price")]
     public class PriceController : Controller
     {
+        [HttpGet]
+        public string Test()
+        {
+            return "Ok";
+        }
+
         [HttpGet("{datetime}")]
         public IActionResult GetPrice(DateTime dateTime)
         {
