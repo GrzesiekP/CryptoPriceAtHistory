@@ -17,6 +17,7 @@ jobs:
     steps:
       - checkout
       - run:
+          set -e
           name: test
           command: 'dotnet test "CryptoPriceAtHistory.Tests/CryptoPriceAtHistory.Tests.csproj"'
   dockerize:
