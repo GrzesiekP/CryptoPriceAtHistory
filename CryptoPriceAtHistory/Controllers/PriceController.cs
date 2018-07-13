@@ -12,7 +12,7 @@ namespace CryptoPriceAtHistory.Controllers
         [HttpGet]
         public string Test()
         {
-            return "Ok, cd";
+            return "Ok, cd2";
         }
 
         [HttpGet("{datetime}")]
